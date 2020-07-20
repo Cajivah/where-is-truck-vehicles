@@ -1,0 +1,36 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+	<changeSet id="20200720-001" author="j.malyjasiak">
+		<createTable tableName="VEHICLES">
+			<column name="ID" autoIncrement="true" type="INT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="NAME" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="LOCATION_ID" type="INT" />
+		</createTable>
+	</changeSet>
+
+	<changeSet id="20200720-002" author="j.malyjasiak">
+		<createTable tableName="LOCATIONS">
+			<column name="ID" autoIncrement="true" type="INT">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="LAT" type="FLOAT(10, 6)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="LNG" type="FLOAT(10, 6)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet id="20200720-003" author="j.malyjasiak">
+		<addForeignKeyConstraint baseTableName="VEHICLES" baseColumnNames="CURRENT_LOCATION"
+			 constraintName="FK_VEHICLES_CURRENT_LOCATION_LOCATIONS_ID" referencedTableName="LOCATIONS"
+			referencedColumnNames="ID" />
+	</changeSet>
+</databaseChangeLog>
