@@ -1,20 +1,25 @@
 package com.whereistruck.domain.dto;
 
+import java.math.BigDecimal;
+
+import com.whereistruck.repository.entities.Vehicle;
+
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 
 @RegisterForReflection
 public class VehicleDto {
     private Long id;
     private String name;
-    private Location currentLocation;
-
-    public VehicleDto(final Long id, final String name, final Location currentLocation) {
-        this.id = id;
-        this.name = name;
-        this.currentLocation = currentLocation;
-    }
+    private LocationDto locationDto;
 
     public VehicleDto() {
+    }
+
+    public VehicleDto(final Vehicle vehicle) {
+        this.id = vehicle.id;
+        this.name = vehicle.getName();
+        this.locationDto = new LocationDto(vehicle.getCurrentLocation());
     }
 
     public Long getId() {
@@ -33,40 +38,11 @@ public class VehicleDto {
         this.name = name;
     }
 
-    public Location getCurrentLocation() {
-        return currentLocation;
+    public LocationDto getLocationDto() {
+        return locationDto;
     }
 
-    public void setCurrentLocation(final Location currentLocation) {
-        this.currentLocation = currentLocation;
-    }
-
-    public static class Location {
-        private String lat;
-        private String lng;
-
-        public Location(final String lat, final String lng) {
-            this.lat = lat;
-            this.lng = lng;
-        }
-
-        public Location() {
-        }
-
-        public String getLat() {
-            return lat;
-        }
-
-        public void setLat(final String lat) {
-            this.lat = lat;
-        }
-
-        public String getLng() {
-            return lng;
-        }
-
-        public void setLng(final String lng) {
-            this.lng = lng;
-        }
+    public void setLocationDto(final LocationDto locationDto) {
+        this.locationDto = locationDto;
     }
 }

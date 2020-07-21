@@ -10,7 +10,7 @@ repositories {
 
 dependencies {
     implementation 'io.quarkus:quarkus-jdbc-postgresql'
-    implementation 'io.quarkus:quarkus-liquiabse'
+    implementation 'io.quarkus:quarkus-liquibase'
     implementation 'io.quarkus:quarkus-hibernate-orm-panache'
     implementation 'io.quarkus:quarkus-config-yaml'
     implementation 'io.quarkus:quarkus-kafka-client'

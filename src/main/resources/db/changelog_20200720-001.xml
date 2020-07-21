@@ -5,32 +5,37 @@
 
 	<changeSet id="20200720-001" author="j.malyjasiak">
 		<createTable tableName="VEHICLES">
-			<column name="ID" autoIncrement="true" type="INT">
+			<column name="ID" autoIncrement="true" type="BIGINT">
 				<constraints nullable="false" primaryKey="true" />
 			</column>
 			<column name="NAME" type="VARCHAR(255)">
 				<constraints nullable="false" />
 			</column>
-			<column name="LOCATION_ID" type="INT" />
+			<column name="LOCATION_ID" type="BIGINT" />
 		</createTable>
 	</changeSet>
 
 	<changeSet id="20200720-002" author="j.malyjasiak">
 		<createTable tableName="LOCATIONS">
-			<column name="ID" autoIncrement="true" type="INT">
+			<column name="ID" autoIncrement="true" type="BIGINT">
 				<constraints nullable="false" primaryKey="true" />
 			</column>
-			<column name="LAT" type="FLOAT(10, 6)">
+			<column name="LAT" type="NUMERIC(10,6)">
 				<constraints nullable="false"/>
 			</column>
-			<column name="LNG" type="FLOAT(10, 6)">
+			<column name="LNG" type="NUMERIC(10,6)">
 				<constraints nullable="false"/>
 			</column>
 		</createTable>
 	</changeSet>
+
 	<changeSet id="20200720-003" author="j.malyjasiak">
-		<addForeignKeyConstraint baseTableName="VEHICLES" baseColumnNames="CURRENT_LOCATION"
-			 constraintName="FK_VEHICLES_CURRENT_LOCATION_LOCATIONS_ID" referencedTableName="LOCATIONS"
+		<addForeignKeyConstraint baseTableName="VEHICLES" baseColumnNames="LOCATION_ID"
+			 constraintName="FK_VEHICLES_LOCATION_ID_LOCATIONS_ID" referencedTableName="LOCATIONS"
 			referencedColumnNames="ID" />
+	</changeSet>
+
+	<changeSet id="20200720-004" author="j.malyjasiak">
+		<createSequence sequenceName="hibernate_sequence" dataType="BIGINT" />
 	</changeSet>
 </databaseChangeLog>
