@@ -1,6 +1,7 @@
 package com.whereistruck.domain.dto;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 import com.whereistruck.repository.entities.Vehicle;
 
@@ -19,7 +20,7 @@ public class VehicleDto {
     public VehicleDto(final Vehicle vehicle) {
         this.id = vehicle.id;
         this.name = vehicle.getName();
-        this.locationDto = new LocationDto(vehicle.getCurrentLocation());
+        this.locationDto = Optional.ofNullable(vehicle.getCurrentLocation()).map(LocationDto::new).orElse(null);
     }
 
     public Long getId() {

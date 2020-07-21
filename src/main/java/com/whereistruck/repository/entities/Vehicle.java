@@ -6,6 +6,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.whereistruck.domain.dto.VehicleDto;
+
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 @Entity
@@ -17,6 +19,13 @@ public class Vehicle extends PanacheEntity {
     @OneToOne
     @JoinColumn(name = "LOCATION_ID")
     private Location currentLocation;
+
+    public Vehicle() {
+    }
+
+    public Vehicle(final VehicleDto vehicleDto) {
+        name = vehicleDto.getName();
+    }
 
     public String getName() {
         return name;
