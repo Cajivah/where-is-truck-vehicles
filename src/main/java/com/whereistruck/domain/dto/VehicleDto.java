@@ -1,11 +1,9 @@
 package com.whereistruck.domain.dto;
 
-import java.math.BigDecimal;
 import java.util.Optional;
 
 import com.whereistruck.repository.entities.Vehicle;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 
 @RegisterForReflection
