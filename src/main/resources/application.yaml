@@ -11,3 +11,11 @@ quarkus:
   liquibase:
     migrate-at-start: true
     change-log: db/changelog.xml
+  container-image:
+    name: where-is-truck-vehicle-service
+    group: cajivah
+    username: ${DOCKERHUB_USERNAME}
+    password: ${DOCKERHUB_PASS}
+  application:
+    version: 0.0.1
+

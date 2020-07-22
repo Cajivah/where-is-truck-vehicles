@@ -4,9 +4,6 @@ import java.math.BigDecimal;
 
 import com.whereistruck.repository.entities.Location;
 
-import io.quarkus.runtime.annotations.RegisterForReflection;
-
-@RegisterForReflection
 public class LocationDto {
     private BigDecimal lat;
     private BigDecimal lng;

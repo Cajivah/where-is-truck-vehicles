@@ -6,7 +6,6 @@ import com.whereistruck.repository.entities.Vehicle;
 
 import io.quarkus.runtime.annotations.RegisterForReflection;
 
-@RegisterForReflection
 public class VehicleDto {
     private Long id;
     private String name;
