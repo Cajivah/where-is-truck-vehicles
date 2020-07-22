@@ -4,7 +4,7 @@ quarkus:
     username: ${POSTGRES_USER:admin}
     password: ${POSTGRES_PASSWORD:admin}
     jdbc:
-      url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB_NAME:vehicles-service-db}
+      url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB_NAME:vehicle-service-db}
   hibernate-orm:
     database:
       generation: validate
