@@ -1,5 +1,7 @@
 package com.whereistruck.repository.entities;
 
+import java.util.UUID;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -14,9 +16,13 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
 @Table(name = "VEHICLES")
 public class Vehicle extends PanacheEntity {
 
+    @Column(name = "UUID")
+    private String uuid = UUID.randomUUID().toString();
+
     @Column(name = "NAME")
     private String name;
-    @OneToOne
+
+    @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "LOCATION_ID")
     private Location currentLocation;
 
@@ -33,6 +39,14 @@ public class Vehicle extends PanacheEntity {
 
     public void setName(final String name) {
         this.name = name;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(final String uuid) {
+        this.uuid = uuid;
     }
 
     public Location getCurrentLocation() {

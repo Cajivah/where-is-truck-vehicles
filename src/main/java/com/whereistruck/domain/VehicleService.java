@@ -6,8 +6,12 @@ import java.util.stream.Collectors;
 import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;
 
+import com.whereistruck.domain.dto.NewLocation;
 import com.whereistruck.domain.dto.VehicleDto;
+import com.whereistruck.repository.entities.Location;
 import com.whereistruck.repository.entities.Vehicle;
+
+import io.smallrye.reactive.messaging.annotations.Blocking;
 
 @ApplicationScoped
 public class VehicleService {
@@ -21,5 +25,16 @@ public class VehicleService {
         final Vehicle vehicle = new Vehicle(vehicleDto);
         vehicle.persist();
         return new VehicleDto(vehicle);
+    }
+
+    @Transactional
+    @Blocking
+    public void updateLocation(final NewLocation newLocation) {
+        Vehicle.<Vehicle>find("uuid", newLocation.getKey()).firstResultOptional().ifPresent(vehicle -> this.updateLocation(vehicle, newLocation));
+    }
+
+    private void updateLocation(final Vehicle vehicle, final NewLocation newLocation) {
+        final Location location = new Location(newLocation);
+        vehicle.setCurrentLocation(location);
     }
 }

@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.whereistruck.domain.dto.NewLocation;
+
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 @Entity
@@ -24,6 +26,11 @@ public class Location extends PanacheEntity {
     public Location(final BigDecimal lat, final BigDecimal lng) {
         this.lat = lat;
         this.lng = lng;
+    }
+
+    public Location(final NewLocation newLocation) {
+        this.lat = newLocation.getCoordinates().getLat().getValue();
+        this.lat = newLocation.getCoordinates().getLng().getValue();
     }
 
     public BigDecimal getLat() {

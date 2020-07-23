@@ -5,7 +5,7 @@ import java.util.Optional;
 import com.whereistruck.repository.entities.Vehicle;
 
 public class VehicleDto {
-    private Long id;
+    private String uuid;
     private String name;
     private LocationDto locationDto;
 
@@ -13,17 +13,17 @@ public class VehicleDto {
     }
 
     public VehicleDto(final Vehicle vehicle) {
-        this.id = vehicle.id;
+        this.uuid = vehicle.getUuid();
         this.name = vehicle.getName();
         this.locationDto = Optional.ofNullable(vehicle.getCurrentLocation()).map(LocationDto::new).orElse(null);
     }
 
-    public Long getId() {
-        return id;
+    public String getUuid() {
+        return uuid;
     }
 
-    public void setId(final Long id) {
-        this.id = id;
+    public void setUuid(final String uuid) {
+        this.uuid = uuid;
     }
 
     public String getName() {

@@ -17,3 +17,15 @@ quarkus:
   application:
     version: 0.0.1
 
+kafka:
+  bootstrap:
+    servers: ${KAFKA_URL:localhost}:${KAFKA_PORT:9092}
+
+mp:
+  messaging:
+    incoming:
+      prices:
+        connector: smallrye-kafka
+      value:
+        deserializer: com.whereistruck.domain.serializer.NewLocationDeserializer;
+

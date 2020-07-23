@@ -38,4 +38,15 @@
 	<changeSet id="20200720-004" author="j.malyjasiak">
 		<createSequence sequenceName="hibernate_sequence" dataType="BIGINT" />
 	</changeSet>
+
+	<changeSet id="20200720-005" author="j.malyjasiak">
+		<addColumn tableName="VEHICLES">
+			<column name="UUID" type="CHAR(36)">
+				<constraints nullable="false" />
+			</column>
+		</addColumn>
+		<createIndex tableName="VEHICLES" indexName="IDX_VEHICLES_UUID">
+			<column name="UUID"/>
+		</createIndex>
+	</changeSet>
 </databaseChangeLog>
