@@ -7,6 +7,8 @@ import org.eclipse.microprofile.reactive.messaging.Incoming;
 
 import com.whereistruck.domain.dto.NewLocation;
 
+import io.smallrye.reactive.messaging.annotations.Blocking;
+
 @ApplicationScoped
 public class LocationListener {
 
@@ -18,6 +20,7 @@ public class LocationListener {
     }
 
     @Incoming("locations")
+    @Blocking
     public void listenForNewLocations(NewLocation newLocation) {
         vehicleService.updateLocation(newLocation);
     }
