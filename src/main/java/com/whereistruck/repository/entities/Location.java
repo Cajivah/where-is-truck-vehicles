@@ -17,10 +17,10 @@ import io.quarkus.runtime.annotations.RegisterForReflection;
 public class Location extends PanacheEntity {
 
     @Column(name = "LAT")
-    private BigDecimal lat;
+    private BigDecimal lat = BigDecimal.ZERO;
 
     @Column(name = "LNG")
-    private BigDecimal lng;
+    private BigDecimal lng = BigDecimal.ZERO;
 
     public Location() {
     }

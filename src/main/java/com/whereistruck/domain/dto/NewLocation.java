@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 import javax.json.bind.annotation.JsonbCreator;
+import javax.json.bind.annotation.JsonbProperty;
 
 import io.quarkus.runtime.annotations.RegisterForReflection;
 
@@ -14,7 +15,7 @@ public class NewLocation {
     private final String locationType;
 
     @JsonbCreator
-    public NewLocation(final Subject subject, final Coordinates coordinates, final String locationType) {
+    public NewLocation(@JsonbProperty final Subject subject, @JsonbProperty final Coordinates coordinates, @JsonbProperty final String locationType) {
         this.subject = subject;
         this.coordinates = coordinates;
         this.locationType = locationType;
@@ -48,12 +49,13 @@ public class NewLocation {
         return Objects.hash(subject, coordinates, locationType);
     }
 
+    @RegisterForReflection
     public static class Subject {
         private final String uuid;
 
 
         @JsonbCreator
-        public Subject(final String uuid) {
+        public Subject(@JsonbProperty final String uuid) {
             this.uuid = uuid;
         }
 
@@ -77,22 +79,25 @@ public class NewLocation {
 
     }
 
+    @RegisterForReflection
     public static class Coordinates {
-        private final Coordinate lat;
-        private final Coordinate lng;
-
-        @JsonbCreator
-        public Coordinates(final Coordinate lat, final Coordinate lng) {
-            this.lat = lat;
-            this.lng = lng;
-        }
+        private Coordinate lat;
+        private Coordinate lng;
 
         public Coordinate getLat() {
             return lat;
         }
 
+        public void setLat(final Coordinate lat) {
+            this.lat = lat;
+        }
+
         public Coordinate getLng() {
             return lng;
+        }
+
+        public void setLng(final Coordinate lng) {
+            this.lng = lng;
         }
 
         @Override
@@ -110,6 +115,7 @@ public class NewLocation {
             return Objects.hash(lat, lng);
         }
 
+        @RegisterForReflection
         public static class Coordinate {
             private final BigDecimal value;
 
@@ -119,7 +125,7 @@ public class NewLocation {
 
 
             @JsonbCreator
-            public Coordinate(final BigDecimal value) {
+            public Coordinate(@JsonbProperty final BigDecimal value) {
                 this.value = value;
             }
 
