@@ -1,4 +1,4 @@
-# vehicles project
+# Where is truck – vehicles service
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
@@ -33,3 +33,7 @@ Or, if you don't have GraalVM installed, you can run the native executable build
 You can then execute your native executable with: `./build/vehicles-1.0-SNAPSHOT-runner`
 
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/gradle-tooling#building-a-native-executable.
+
+## Custom scripts
+
+A short wrapper for building and pushing both native and JVM containers to dockerhub have been created as `_buildPush.sh` and `_buildPushNative.sh` respectively. If building native, use graalvm jdk distribution. Both wrappers require you to set `DOCKERHUB_USERNAME` and `DOCKERHUB_PASS` env variables properly.
