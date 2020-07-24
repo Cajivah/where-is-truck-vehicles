@@ -9,9 +9,11 @@ import javax.persistence.Table;
 import com.whereistruck.domain.dto.NewLocation;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import io.quarkus.runtime.annotations.RegisterForReflection;
 
 @Entity
 @Table(name = "LOCATIONS")
+@RegisterForReflection
 public class Location extends PanacheEntity {
 
     @Column(name = "LAT")

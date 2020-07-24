@@ -7,7 +7,7 @@ quarkus:
       url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB_NAME:vehicle-service-db}
   hibernate-orm:
     database:
-      generation: validate
+      generation: none
   liquibase:
     migrate-at-start: true
     change-log: db/changelog.xml
@@ -24,8 +24,13 @@ kafka:
 mp:
   messaging:
     incoming:
-      prices:
+      locations:
         connector: smallrye-kafka
-      value:
-        deserializer: com.whereistruck.domain.serializer.NewLocationDeserializer;
+        value:
+          deserializer: com.whereistruck.domain.serializer.NewLocationDeserializer
+        group:
+          id: vehicle-service
+        auto:
+          offset:
+            reset: earliest
 

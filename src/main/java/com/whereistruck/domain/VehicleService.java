@@ -14,7 +14,7 @@ import com.whereistruck.repository.entities.Vehicle;
 @ApplicationScoped
 public class VehicleService {
     public List<VehicleDto> getAllVehicles() {
-        final List<Vehicle> vehicles = Vehicle.findAll().list();
+        final List<Vehicle> vehicles = Vehicle.listAll();
         return vehicles.stream().map(VehicleDto::new).collect(Collectors.toList());
     }
 
@@ -27,7 +27,8 @@ public class VehicleService {
 
     @Transactional
     public void updateLocation(final NewLocation newLocation) {
-        Vehicle.<Vehicle>find("uuid", newLocation.getKey()).firstResultOptional().ifPresent(vehicle -> this.updateLocation(vehicle, newLocation));
+        Vehicle.findByUuid(newLocation.getSubject().getUuid())
+                .ifPresent(vehicle -> this.updateLocation(vehicle, newLocation));
     }
 
     private void updateLocation(final Vehicle vehicle, final NewLocation newLocation) {

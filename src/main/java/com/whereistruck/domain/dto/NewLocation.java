@@ -3,29 +3,17 @@ package com.whereistruck.domain.dto;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonCreator.Mode;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import javax.json.bind.annotation.JsonbCreator;
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
+
+@RegisterForReflection
 public class NewLocation {
     private final Coordinates coordinates;
     private final Subject subject;
     private final String locationType;
 
-    public String getKey() {
-        return subject.getUuid();
-    }
-
-    public String asJson(final ObjectMapper objectMapper) {
-        try {
-            return objectMapper.writeValueAsString(this);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
+    @JsonbCreator
     public NewLocation(final Subject subject, final Coordinates coordinates, final String locationType) {
         this.subject = subject;
         this.coordinates = coordinates;
@@ -60,12 +48,12 @@ public class NewLocation {
         return Objects.hash(subject, coordinates, locationType);
     }
 
-    static class Subject {
+    public static class Subject {
         private final String uuid;
 
 
-        @JsonCreator(mode = Mode.PROPERTIES)
-        public Subject(@JsonProperty final String uuid) {
+        @JsonbCreator
+        public Subject(final String uuid) {
             this.uuid = uuid;
         }
 
@@ -93,6 +81,7 @@ public class NewLocation {
         private final Coordinate lat;
         private final Coordinate lng;
 
+        @JsonbCreator
         public Coordinates(final Coordinate lat, final Coordinate lng) {
             this.lat = lat;
             this.lng = lng;
@@ -129,8 +118,8 @@ public class NewLocation {
             }
 
 
-            @JsonCreator(mode = Mode.PROPERTIES)
-            public Coordinate(@JsonProperty final BigDecimal value) {
+            @JsonbCreator
+            public Coordinate(final BigDecimal value) {
                 this.value = value;
             }
 
